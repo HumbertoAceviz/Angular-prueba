@@ -1,1 +1,14 @@
-<p>user-form works!</p>
+<div>
+  <h2 appHighlight>Agregar Usuario</h2>
+  <form (ngSubmit)="addUser()">
+    <div>
+      <label for="name">Nombre:</label>
+      <input type="text" id="name" [(ngModel)]="user.name" name="name" required>
+    </div>
+    <div>
+      <label for="email">Correo Electrónico:</label>
+      <input type="email" id="email" [(ngModel)]="user.email" name="email" required>
+    </div>
+    <button type="submit">Agregar</button>
+  </form>
+</div>
