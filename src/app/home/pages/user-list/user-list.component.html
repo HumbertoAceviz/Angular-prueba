@@ -1,10 +1,13 @@
-<div >
-  <h2 appHighlight>Lista de Usuarios</h2>
+
+
+<div>
+  <input type="text" [(ngModel)]="searchText" placeholder="Buscar usuarios por nombre" />
   <ul>
-    <li *ngFor="let user of users" appHighlight>
-      {{ user.name }} ({{ user.email }})
+    <li *ngFor="let user of (users$ | async) | filter:searchText" appHighlight>
+      <span (click)="editUser(user.id)" style="cursor: pointer;">{{ user.name }} ({{ user.email }})</span>
       <button (click)="deleteUser(user.id)">Eliminar</button>
     </li>
   </ul>
+
   <button [routerLink]="['/home/user-form']">Agregar</button>
 </div>

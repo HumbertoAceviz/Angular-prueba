@@ -4,9 +4,16 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'filter'
 })
 export class FilterPipe implements PipeTransform {
-
-  transform(value: unknown, ...args: unknown[]): unknown {
-    return null;
+  transform(users: any[] | null, searchText: string): any[] {
+    if (!users) {
+      return [];
+    }
+    if (!searchText) {
+      return users; 
+    }
+    searchText = searchText.toLowerCase();
+    return users.filter(user =>
+      user.name.toLowerCase().includes(searchText)
+    );
   }
-
 }

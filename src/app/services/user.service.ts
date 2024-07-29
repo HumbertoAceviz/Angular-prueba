@@ -1,36 +1,54 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
+import { Firestore, collection, collectionData, doc, setDoc, addDoc,  deleteDoc, docData } from '@angular/fire/firestore';
+import { Observable, from} from 'rxjs';
+
 import { User } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-
-  private users: User[] = [
-    { id: 1, name: 'John Doe', email: 'john.doe@example.com' },
-    { id: 2, name: 'Jane Smith', email: 'jane.smith@example.com' }
-  ];
-
-  constructor() { }
-
-  createUser(user: User): void {
-    this.users.push(user);
-  }
+firestore = inject(Firestore);
+userCollection = collection(this.firestore, 'users')
 
 
-  getUsers(): User[] {
-    return this.users;
+
+  getUsers(): Observable<User[]> {
+    return collectionData(this.userCollection,
+       {idField : 'id',
+       }) as Observable<User[]>;
 
   }
 
-  addUser(user: User): void {
-    user.id = this.users.length + 1;
-    this.users.push(user);
+  addUser1(name : string, email : string) : Observable<string> {
+    const userCreate = {name, email}
+    const promise = addDoc(this.userCollection, userCreate).then (response => response.id);
+    return from(promise);
   }
 
-  deleteUser(id: number): void {
-    this.users = this.users.filter(user => user.id !== id);
+
+  updateUser1(userId: string, dataToUpdate : {name : string, email: string}): Observable<void> {
+    const docRef = doc(this.firestore, 'users/' + userId);
+    const promise = setDoc(docRef, dataToUpdate);
+    return from(promise)
   }
+
+
+  getUserById(userId: string): Observable<User> {
+    const docRef = doc(this.firestore, `users/${userId}`);
+    return docData(docRef, { idField: 'id' }) as Observable<User>;
+  }
+
+  removeUser (userId : String) : Observable<void> {
+    const docRef = doc(this.firestore, `users/${userId}`);
+    const promise = deleteDoc(docRef);
+    return from(promise);
+  }
+
+
+
+
+
 
 
 }

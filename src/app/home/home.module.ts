@@ -5,7 +5,9 @@ import { HomeComponent } from './home.component';
 import { UserListComponent } from './pages/user-list/user-list.component';
 import { UserFormComponent } from './pages/user-form/user-form.component';
 import { RouterModule, Routes } from '@angular/router';
-import { HighlightDirective } from '../directives/highlight.directive';
+
+import { DirectivesModule } from '../modules/directives.module';
+import { PipesModule } from '../modules/pipes.module';
 
 
 
@@ -16,6 +18,7 @@ const routes: Routes = [
     path: '',  children: [
       { path: 'user-list', component: UserListComponent },
       { path: 'user-form', component: UserFormComponent },
+      { path: 'user-form/:id', component: UserFormComponent },
       { path: '**', redirectTo: 'user-list',}
     ]
   }
@@ -23,7 +26,7 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    HighlightDirective,
+
     HomeComponent,
     UserFormComponent,
     UserListComponent,
@@ -31,7 +34,8 @@ const routes: Routes = [
 
   ],
   imports: [
-
+    PipesModule,
+    DirectivesModule,
     CommonModule,
     FormsModule,
     RouterModule.forChild(routes)
