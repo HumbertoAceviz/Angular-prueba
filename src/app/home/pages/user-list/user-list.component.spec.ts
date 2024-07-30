@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { UserListComponent } from './user-list.component';
 import { UserService } from '../../../services/user.service';
-import { FilterPipe } from '../../../pipes/filter.pipe';
+import { FilterPipe } from '../../../shared/pipes/filter.pipe';
 import { of, throwError } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
@@ -11,7 +11,7 @@ class MockUserService {
   getUsers() {
     return of([
       { id: '1', name: 'John Doe', email: 'john.doe@example.com' },
-      { id: '2', name: 'Jane Doe', email: 'jane.doe@example.com' }
+      { id: '2', name: 'Jane Doe', email: 'jane.doe@example.com' },
     ]);
   }
 
@@ -28,13 +28,10 @@ describe('UserListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ UserListComponent, FilterPipe ],
-      imports: [ FormsModule, HttpClientTestingModule, RouterTestingModule ],
-      providers: [
-        { provide: UserService, useClass: MockUserService }
-      ]
-    })
-    .compileComponents();
+      declarations: [UserListComponent, FilterPipe],
+      imports: [FormsModule, HttpClientTestingModule, RouterTestingModule],
+      providers: [{ provide: UserService, useClass: MockUserService }],
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -52,7 +49,7 @@ describe('UserListComponent', () => {
     component.ngOnInit();
     fixture.detectChanges();
 
-    component.users$.subscribe(users => {
+    component.users$.subscribe((users) => {
       expect(users.length).toBe(2);
       expect(users[0].name).toBe('John Doe');
       expect(users[1].name).toBe('Jane Doe');
@@ -71,7 +68,9 @@ describe('UserListComponent', () => {
 
     setTimeout(() => {
       expect(mockUserService.removeUser).toHaveBeenCalledWith('1');
-      expect(window.alert).toHaveBeenCalledWith('Usuario eliminado exitosamente.');
+      expect(window.alert).toHaveBeenCalledWith(
+        'Usuario eliminado exitosamente.'
+      );
       done();
     }, 0); // Set a timeout to let async code complete
   });
@@ -91,5 +90,4 @@ describe('UserListComponent', () => {
       done();
     }, 0); // Set a timeout to let async code complete
   });
-
 });

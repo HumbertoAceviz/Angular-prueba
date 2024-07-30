@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HighlightDirective } from 'src/app/directives/highlight.directive';
+import { HighlightDirective } from 'src/app/shared/directives/highlight.directive';
 
 
 

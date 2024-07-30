@@ -9,36 +9,26 @@ import { RouterModule, Routes } from '@angular/router';
 import { DirectivesModule } from '../modules/directives.module';
 import { PipesModule } from '../modules/pipes.module';
 
-
-
-
-
 const routes: Routes = [
   {
-    path: '',  children: [
+    path: '',
+    children: [
       { path: 'user-list', component: UserListComponent },
       { path: 'user-form', component: UserFormComponent },
       { path: 'user-form/:id', component: UserFormComponent },
-      { path: '**', redirectTo: 'user-list',}
-    ]
-  }
+      { path: '**', redirectTo: 'user-list' },
+    ],
+  },
 ];
 
 @NgModule({
-  declarations: [
-
-    HomeComponent,
-    UserFormComponent,
-    UserListComponent,
-
-
-  ],
+  declarations: [HomeComponent, UserFormComponent, UserListComponent],
   imports: [
     PipesModule,
     DirectivesModule,
     CommonModule,
     FormsModule,
-    RouterModule.forChild(routes)
-  ]
+    RouterModule.forChild(routes),
+  ],
 })
-export class HomeModule { }
+export class HomeModule {}
