@@ -7,7 +7,7 @@ import { HighlightDirective } from './highlight.directive';
 @Component({
   template: `<div appHighlight>Test Element</div>`
 })
-class TestComponent {}
+class TestComponent { }
 
 describe('HighlightDirective', () => {
   let fixture: ComponentFixture<TestComponent>;

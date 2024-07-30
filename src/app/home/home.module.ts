@@ -9,6 +9,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { DirectivesModule } from '../modules/directives.module';
 import { PipesModule } from '../modules/pipes.module';
 
+
 const routes: Routes = [
   {
     path: '',

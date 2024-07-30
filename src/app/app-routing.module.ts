@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
+    //Implementacion de Lazy Load
     path: 'home',
     loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
   },
