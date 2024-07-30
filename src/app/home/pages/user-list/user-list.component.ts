@@ -16,14 +16,20 @@ export class UserListComponent implements OnInit {
 
   constructor(private userService: UserService, private router: Router) {}
 
+
+  //Se inicia el componente y se obtiene al lista de usuarios
   ngOnInit(): void {
     this.users$ = this.userService.getUsers();
   }
+
+
+
+  //Se borra el usuario mediante la funcion del servicio, proporcionadole el user id
   deleteUser(userId: string): void {
 
     this.userService.removeUser(userId).subscribe({
       next: () => {
-        this.users$ = this.userService.getUsers();
+   alert('Usuario eliminado exitosamente.');
       },
       error: (err) => {
         console.error('Error deleting user:', err);
@@ -31,6 +37,8 @@ export class UserListComponent implements OnInit {
     });
   }
 
+
+  //Funciona para editar un usuario al seleccionarlo en la lista
   editUser(id: string) {
     this.router.navigate(['/home/user-form', id]);
   }

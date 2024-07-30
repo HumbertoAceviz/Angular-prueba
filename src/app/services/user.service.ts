@@ -13,6 +13,7 @@ userCollection = collection(this.firestore, 'users')
 
 
 
+   //Se hace una llamada a la bd para obtener la lista de usuarios, y se les asigna un id
   getUsers(): Observable<User[]> {
     return collectionData(this.userCollection,
        {idField : 'id',
@@ -20,25 +21,32 @@ userCollection = collection(this.firestore, 'users')
 
   }
 
-  addUser1(name : string, email : string) : Observable<string> {
+
+   //Se mandan los campos del usuario  ala bd, para agregar uno nuevo
+  addUser(name : string, email : string) : Observable<string> {
     const userCreate = {name, email}
     const promise = addDoc(this.userCollection, userCreate).then (response => response.id);
     return from(promise);
   }
 
 
-  updateUser1(userId: string, dataToUpdate : {name : string, email: string}): Observable<void> {
+
+  //Se mande el id y los campos del usuario que sera editado
+  updateUser(userId: string, dataToUpdate : {name : string, email: string}): Observable<void> {
     const docRef = doc(this.firestore, 'users/' + userId);
     const promise = setDoc(docRef, dataToUpdate);
     return from(promise)
   }
 
 
+
+  //Se trae un usuario especifico por medio del id
   getUserById(userId: string): Observable<User> {
     const docRef = doc(this.firestore, `users/${userId}`);
     return docData(docRef, { idField: 'id' }) as Observable<User>;
   }
 
+  //Se elimina un usuario espefico, mediante el id que obtenemos del usuario
   removeUser (userId : String) : Observable<void> {
     const docRef = doc(this.firestore, `users/${userId}`);
     const promise = deleteDoc(docRef);
