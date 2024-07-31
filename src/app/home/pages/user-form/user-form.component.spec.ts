@@ -7,7 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ActivatedRoute } from '@angular/router';
 
-// Mock del servicio de usuarios
+// Mockeamos el servico
 class MockUserService {
   getUserById(id: string) {
     return of({ id: '1', name: 'John Doe', email: 'john.doe@example.com' });
@@ -22,7 +22,7 @@ class MockUserService {
   }
 }
 
-// Mock del ActivatedRoute para pruebas
+// Mockeamos ActivatedRoute para pruebas
 class MockActivatedRoute {
   snapshot = {
     paramMap: {

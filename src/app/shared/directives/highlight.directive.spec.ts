@@ -16,7 +16,7 @@ describe('HighlightDirective', () => {
   let renderer: Renderer2;
 
   beforeEach(() => {
-    // Configura TestBed
+    // Configuramos TestBed
     TestBed.configureTestingModule({
       declarations: [HighlightDirective, TestComponent],
       providers: [
@@ -28,7 +28,7 @@ describe('HighlightDirective', () => {
     element = fixture.debugElement.query(By.directive(HighlightDirective)).nativeElement;
     renderer = TestBed.inject(Renderer2);
 
-    // Obtén la instancia de la directiva
+    // Obtenemos la instancia de la directiva
     directiveInstance = new HighlightDirective(new ElementRef(element), renderer);
   });
 

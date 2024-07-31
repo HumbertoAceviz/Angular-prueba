@@ -15,7 +15,7 @@ import {
   DocumentData,
 } from 'firebase/firestore';
 
-// Mock de Firestore
+//mockeamos firestore
 class MockFirestore {
   collection(path: string): CollectionReference<DocumentData> {
     return {
@@ -46,7 +46,7 @@ describe('UserService', () => {
     service = TestBed.inject(UserService);
     firestore = TestBed.inject(Firestore);
 
-    jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000; // Incrementar el tiempo de espera de Jasmine
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
   });
 
   it('should be created', () => {

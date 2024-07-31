@@ -20,9 +20,14 @@ export class HighlightDirective {
   }
 
 
+  
+
+
   // Metodo que cambiara el color del elemento del dom, utiliando render2, mediante el color
   // que se le asigne en la llamada del evento mousenter
   private highlight(color: string | null) {
     this.renderer.setStyle(this.el.nativeElement, 'backgroundColor', color);
   }
 }
+
+
