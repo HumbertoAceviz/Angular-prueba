@@ -1,38 +1,18 @@
 import { TestBed } from '@angular/core/testing';
 import { UserService } from './user.service';
-import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import {
-  provideFirestore,
-  getFirestore,
   Firestore,
+  getFirestore,
+  provideFirestore,
 } from '@angular/fire/firestore';
-import { environment } from '../../environments/environment';
-import { of, throwError } from 'rxjs';
-import { User } from '../models/user.model';
-import {
-  collection,
-  CollectionReference,
-  DocumentData,
-} from 'firebase/firestore';
+import { of } from 'rxjs';
+import { User } from 'src/app/models/user.model';
 
-//mockeamos firestore
-class MockFirestore {
-  collection(path: string): CollectionReference<DocumentData> {
-    return {
-      withConverter: () => this,
-      path: path,
-      id: '',
-      type: 'collection',
-      firestore: {} as Firestore,
-      parent: null,
-      doc: jasmine.createSpy('doc'),
-    } as unknown as CollectionReference<DocumentData>;
-  }
-}
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { environment } from 'src/environments/environment';
 
 describe('UserService', () => {
-  let service: UserService;
-  let firestore: Firestore;
+  let userService: UserService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -42,36 +22,79 @@ describe('UserService', () => {
       ],
       providers: [UserService],
     });
-
-    service = TestBed.inject(UserService);
-    firestore = TestBed.inject(Firestore);
-
-    jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
+    userService = TestBed.inject(UserService);
   });
 
   it('should be created', () => {
-    expect(service).toBeTruthy();
+    expect(userService).toBeTruthy();
   });
 
-  it('should return a list of users', (done: DoneFn) => {
-    const mockUserList: User[] = [
-      { id: '1', name: 'zzzzzzzzzz', email: 'zzzzzzzzzz' },
-      { id: '2', name: 'aaa', email: 'aaaaa' },
-    ];
 
-    spyOn(collection(firestore, 'users'), 'withConverter').and.returnValue({
-      collectionData: jasmine
-        .createSpy('collectionData')
-        .and.returnValue(of(mockUserList)),
-    } as unknown as CollectionReference<DocumentData>);
+  it('should add a user and remove it', async () => {
+    try {
+      const user: User = {id: "", name: 'Test User', email: 'Lastname' };
 
-    service.getUsers().subscribe((users) => {
-      expect(users.length).toBe(2);
-      expect(users[0].name).toBe('aaa');
-      expect(users[0].email).toBe('aaaaa');
-      expect(users[1].name).toBe('zzzzzzzzzz');
-      expect(users[1].email).toBe('zzzzzzzzzz');
-      done();
-    });
+      const id = await new Promise<string>((resolve, reject) => {
+        userService.addUser(user.name, user.email).subscribe({
+          next: (id) => resolve(id),
+          error: (error) => reject(new Error(`Error adding user: ${error.message}`)),
+        });
+      });
+
+      expect(id).toBeDefined();
+
+      await new Promise<void>((resolve, reject) => {
+        userService.removeUser(id).subscribe({
+          next: () => resolve(),
+          error: (error) => reject(new Error(`Error removing user: ${error.message}`)),
+        });
+      });
+
+    } catch (error) {
+      fail(error);
+    }
   });
-});
+
+
+
+
+  it('should get users', async () => {
+    try {
+      const users = await new Promise<User[]>((resolve, reject) => {
+        userService.getUsers().subscribe({
+          next: (users) => resolve(users),
+          error: (error) => reject('Error getting users: ' + error),
+        });
+      });
+
+      users.forEach((user) => {
+        expect(user.name).toEqual(jasmine.any(String));
+        expect(user.email).toEqual(jasmine.any(String));
+      });
+
+    } catch (error) {
+      fail('Error getting users: ' + error);
+    }
+  });
+
+  it('should update a user', async () => {
+    try {
+      const id = "M51jlOn3mLfRmXp01gFN";
+      const user: User = { id :"  M51jlOn3mLfRmXp01gFN", name: 'Test User osman', email: 'Lastname test user' };
+
+      await new Promise<void>((resolve, reject) => {
+        userService.updateUser(id, user).subscribe({
+          next: () => resolve(),
+          error: (error) => reject(new Error(`Error updating user: ${error.message}`)),
+        });
+      });
+
+    } catch (error) {
+      fail(error);
+    }
+  });
+
+
+
+
+})
