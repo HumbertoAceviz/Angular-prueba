@@ -1,27 +1,98 @@
-# AngularTest
+# Prueba de Angular 16 para Desarrollador
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.14.
+## Descripción del Proyecto
 
-## Development server
+Este es un proyecto de Angular para gestionar un CRUD (Crear, Leer, Actualizar, Eliminar) de usuarios. La aplicación incluye pruebas unitarias para asegurar el correcto funcionamiento de los componentes y servicios.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Requisitos
 
-## Code scaffolding
+### Node.js y npm
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Descarga e instala Node.js desde [node.js](https://nodejs.org/). npm se instalará automáticamente junto con Node.js.
 
-## Build
+### Git
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Descarga e instala Git desde [Git](https://git-scm.com/).
 
-## Running unit tests
+### Angular CLI
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Instala Angular CLI globalmente ejecutando el siguiente comando:
 
-## Running end-to-end tests
+ ```bash    
+npm install -g @angular/cli
+ ```
+## Configuración del Proyecto
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+1.Para clonar el repositorio, usa el siguiente comando:
 
-## Further help
+```bash
+git clone https://github.com/usuario/repositorio.git
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+2.Instalar Dependecias
+```bash
+npm install
+```
+3. Servir la Aplicacion Angular:
+```bash
+ng serve
+```
+4. Ejecutar Pruebas unitarias:
+ ```bash
+ng test
+```
+
+5.Arquitectura del sistema
+```bash
+src
+└── app
+    ├── core
+    │   ├── components
+    │   │   ├── footer
+    │   │   └── header
+    │   ├── guards
+    │   ├── interceptors
+    │   └── utils
+    ├── home
+    │   ├── pages
+    │   │   ├── user-form
+    │   │   │   ├── user-form.component.ts
+    │   │   │   ├── user-form.component.html
+    │   │   │   ├── user-form.component.css
+    │   │   │   └── user-form.component.spec.ts
+    │   │   └── user-list
+    │   │       ├── user-list.component.ts
+    │   │       ├── user-list.component.html
+    │   │       ├── user-list.component.css
+    │   │       └── user-list.component.spec.ts
+    │   ├── home.component.ts
+    │   ├── home.component.html
+    │   ├── home.component.css
+    │   ├── home.component.spec.ts
+    │   └── home.module.ts
+    ├── models
+    │   └── user.model.ts
+    ├── modules
+    │   ├── directives.module.ts
+    │   ├── pipes.module.ts
+    │   └── tailwind.config.js
+    ├── services
+    │   ├── user.service.ts
+    │   └── user.service.spec.ts
+    ├── shared
+    │   ├── directives
+    │   │   ├── highlight.directive.ts
+    │   │   └── highlight.directive.spec.ts
+    │   ├── pipes
+    │   │   ├── filter.pipe.ts
+    │   │   └── filter.pipe.spec.ts
+    ├── app-routing.module.ts
+    ├── app.module.ts
+    ├── app.component.ts
+    ├── app.component.html
+    └── app.component.css
+
+```
+
+
+ 
