@@ -26,7 +26,7 @@ npm install -g @angular/cli
 1.Para clonar el repositorio, usa el siguiente comando:
 
 ```bash
-git clone https://github.com/usuario/repositorio.git
+git clone https://github.com/HumbertoAceviz/Angular-prueba
 ```
 
 2.Instalar Dependecias
