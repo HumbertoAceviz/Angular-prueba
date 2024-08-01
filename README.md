@@ -41,6 +41,10 @@ ng serve
  ```bash
 ng test
 ```
+5. Ejecutar Pruebas E2E:
+ ```bash
+npx cypress open
+``` 
 
 5.Arquitectura del sistema
 ```bash
