@@ -21,6 +21,7 @@ import { SharedModule } from './shared/shared.module';
 // Servicios
 import { UserService } from './services/user-service/user.service';
 import { RegisterComponent } from './core/components/register/register.component';
+import { DirectivesModule } from './modules/directives.module';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { RegisterComponent } from './core/components/register/register.component
     provideDatabase(() => getDatabase()),
     provideAuth(() => getAuth()), // Asegúrate de proporcionar el módulo de Auth
     SharedModule,
+    DirectivesModule
   ],
   providers: [UserService],
   bootstrap: [AppComponent],
