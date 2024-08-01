@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+
 import { HomeComponent } from './home.component';
 import { UserListComponent } from './pages/user-list/user-list.component';
 import { UserFormComponent } from './pages/user-form/user-form.component';
@@ -8,6 +8,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { DirectivesModule } from '../modules/directives.module';
 import { PipesModule } from '../modules/pipes.module';
+import { SharedModule } from '../shared/shared.module';
 
 
 const routes: Routes = [
@@ -28,7 +29,7 @@ const routes: Routes = [
     PipesModule,
     DirectivesModule,
     CommonModule,
-    FormsModule,
+    SharedModule,
     RouterModule.forChild(routes),
   ],
 })

@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { UserListComponent } from './user-list.component';
-import { UserService } from '../../../services/user.service';
+import { UserService } from '../../../services/user-service/user.service';
 import { FilterPipe } from '../../../shared/pipes/filter.pipe';
 import { of, throwError } from 'rxjs';
 import { FormsModule } from '@angular/forms';
