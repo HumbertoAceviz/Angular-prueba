@@ -44,16 +44,38 @@ ng test
 5. Ejecutar Pruebas E2E:
  ```bash
 npx cypress open
+```
+6. Logear o Registrarse:
+ ```bash
+enail : betito17a@live.com.mx   Password : 12345678
 ``` 
 
-5.Arquitectura del sistema
+7.Arquitectura del sistema
 ```bash
 src
 └── app
     ├── core
     │   ├── components
     │   │   ├── footer
-    │   │   └── header
+    │   │   │   ├── footer.component.ts
+    │   │   │   ├── footer.component.html
+    │   │   │   ├── footer.component.css
+    │   │   │   └── footer.component.spec.ts
+    │   │   ├── header
+    │   │   │   ├── header.component.ts
+    │   │   │   ├── header.component.html
+    │   │   │   ├── header.component.css
+    │   │   │   └── header.component.spec.ts
+    │   │   ├── login
+    │   │   │   ├── login.component.ts
+    │   │   │   ├── login.component.html
+    │   │   │   ├── login.component.css
+    │   │   │   └── login.component.spec.ts
+    │   │   └── register
+    │   │       ├── register.component.ts
+    │   │       ├── register.component.html
+    │   │       ├── register.component.css
+    │   │       └── register.component.spec.ts
     │   ├── guards
     │   ├── interceptors
     │   └── utils
@@ -81,8 +103,12 @@ src
     │   ├── pipes.module.ts
     │   └── tailwind.config.js
     ├── services
-    │   ├── user.service.ts
-    │   └── user.service.spec.ts
+    │   ├── auth-service
+    │   │   ├── auth-service.ts
+    │   │   └── auth-service.spec.ts
+    │   └── user-service
+    │       ├── user-service.ts
+    │       └── user-service.spec.ts
     ├── shared
     │   ├── directives
     │   │   ├── highlight.directive.ts
@@ -90,6 +116,7 @@ src
     │   ├── pipes
     │   │   ├── filter.pipe.ts
     │   │   └── filter.pipe.spec.ts
+    │   └── shared.module.ts
     ├── app-routing.module.ts
     ├── app.module.ts
     ├── app.component.ts
