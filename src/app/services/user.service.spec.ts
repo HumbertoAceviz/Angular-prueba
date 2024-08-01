@@ -80,7 +80,7 @@ describe('UserService', () => {
   it('should update a user', async () => {
     try {
       const id = "M51jlOn3mLfRmXp01gFN";
-      const user: User = { id :"  M51jlOn3mLfRmXp01gFN", name: 'Test User osman', email: 'Lastname test user' };
+      const user: User = { id :"  M51jlOn3mLfRmXp01gFN", name: 'Test User Humerto', email: 'Lastname test user' };
 
       await new Promise<void>((resolve, reject) => {
         userService.updateUser(id, user).subscribe({
