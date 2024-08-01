@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user.model';
-import { UserService } from 'src/app/services/user.service';
+import { UserService } from 'src/app/services/user-service/user.service';
 import { Observable } from 'rxjs';
-
 
 @Component({
   selector: 'app-user-list',
@@ -16,27 +15,22 @@ export class UserListComponent implements OnInit {
 
   constructor(private userService: UserService, private router: Router) {}
 
-
   //Se inicia el componente y se obtiene al lista de usuarios
   ngOnInit(): void {
     this.users$ = this.userService.getUsers();
   }
 
-
-
   //Se borra el usuario mediante la funcion del servicio, proporcionadole el user id
   deleteUser(userId: string): void {
-
     this.userService.removeUser(userId).subscribe({
       next: () => {
-   alert('Usuario eliminado exitosamente.');
+        alert('Usuario eliminado exitosamente.');
       },
       error: (err) => {
         console.error('Error deleting user:', err);
-      }
+      },
     });
   }
-
 
   //Funciona para editar un usuario al seleccionarlo en la lista
   editUser(id: string) {

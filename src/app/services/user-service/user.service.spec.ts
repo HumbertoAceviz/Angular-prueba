@@ -29,15 +29,15 @@ describe('UserService', () => {
     expect(userService).toBeTruthy();
   });
 
-
   it('should add a user and remove it', async () => {
     try {
-      const user: User = {id: "", name: 'Test User', email: 'Lastname' };
+      const user: User = { id: '', name: 'Test User', email: 'Lastname' };
 
       const id = await new Promise<string>((resolve, reject) => {
         userService.addUser(user.name, user.email).subscribe({
           next: (id) => resolve(id),
-          error: (error) => reject(new Error(`Error adding user: ${error.message}`)),
+          error: (error) =>
+            reject(new Error(`Error adding user: ${error.message}`)),
         });
       });
 
@@ -46,17 +46,14 @@ describe('UserService', () => {
       await new Promise<void>((resolve, reject) => {
         userService.removeUser(id).subscribe({
           next: () => resolve(),
-          error: (error) => reject(new Error(`Error removing user: ${error.message}`)),
+          error: (error) =>
+            reject(new Error(`Error removing user: ${error.message}`)),
         });
       });
-
     } catch (error) {
       fail(error);
     }
   });
-
-
-
 
   it('should get users', async () => {
     try {
@@ -71,7 +68,6 @@ describe('UserService', () => {
         expect(user.name).toEqual(jasmine.any(String));
         expect(user.email).toEqual(jasmine.any(String));
       });
-
     } catch (error) {
       fail('Error getting users: ' + error);
     }
@@ -79,22 +75,22 @@ describe('UserService', () => {
 
   it('should update a user', async () => {
     try {
-      const id = "M51jlOn3mLfRmXp01gFN";
-      const user: User = { id :"  M51jlOn3mLfRmXp01gFN", name: 'Test User Humerto', email: 'Lastname test user' };
+      const id = 'M51jlOn3mLfRmXp01gFN';
+      const user: User = {
+        id: '  M51jlOn3mLfRmXp01gFN',
+        name: 'Test User Humerto',
+        email: 'Lastname test user',
+      };
 
       await new Promise<void>((resolve, reject) => {
         userService.updateUser(id, user).subscribe({
           next: () => resolve(),
-          error: (error) => reject(new Error(`Error updating user: ${error.message}`)),
+          error: (error) =>
+            reject(new Error(`Error updating user: ${error.message}`)),
         });
       });
-
     } catch (error) {
       fail(error);
     }
   });
-
-
-
-
-})
+});
